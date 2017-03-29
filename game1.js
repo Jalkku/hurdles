@@ -19,11 +19,11 @@ function initialize(callback) {
 
 $(document).ready(function() {
     initialize(function() {
-        start();
+        onStart();
     });
 });
 
-function start() {
+function onStart() {
     // bg init
     var bg = document.getElementById("background");
     var bgCtx = bg.getContext("2d");
