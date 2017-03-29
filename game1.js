@@ -70,7 +70,7 @@ function onStart() {
     update();
     updateUI();
     countDown();
-    perfectRun();
+    //perfectRun();
 }
 
 var requestAnimationFrame =  
