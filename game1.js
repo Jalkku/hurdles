@@ -55,7 +55,7 @@ $(document).ready(function() {
 $(function() {
     $.getJSON('hurdlers.json', function(data) {
         data.data.forEach(function(name) {
-            names.push(name+" "+surname+" ["+nationality+"]");
+            names.push(name.forename+" "+name.surname+" ["+name.nationality+"]");
         });
     });
 
