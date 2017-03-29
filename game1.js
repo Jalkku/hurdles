@@ -8,14 +8,14 @@ $(document).ready(function() {
     var names = [];
 
     $.getJSON('hurdlers.json', function(data) {
+        var count = 0;
         data.data.forEach(function(name) {
             var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
-            names.push(name_.toString());
-
+            names[count] = name_.toString();
+            count += 1;
         });
     });
-    console.log(typeof names["0"])
-    console.log(typeof names[0])
+    console.log(names[0])
 
     // bg init
     var bg = document.getElementById("background");
