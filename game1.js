@@ -46,10 +46,8 @@ function start() {
             lane = new Lane(i, i, false);
             lanes.push(lane);
             var asd = names[0]
-            var name_ = names[Math.floor(Math.random()*names.length)].forename;
-            console.log(name_)
-            console.log(name_[0])
-            lane.player.name = name_;
+            var name_ = names[Math.floor(Math.random()*names.length)];
+            lane.player.name = name_.forename+" "+name_.lastname+" ["+name_.nationality+"]";
         }
     }
 
