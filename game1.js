@@ -5,7 +5,7 @@ var start;
 var timer;
 
 $(document).ready(function() {
-    var names = [];
+    var names = {};
     console.log(names)
     $.getJSON('hurdlers.json', function(data) {
         var count = 0;
