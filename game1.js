@@ -14,7 +14,7 @@ $(document).ready(function() {
 
         });
     });
-    console.log(names)
+    console.log(names[Math.floor(Math.random()*names.length)])
 
     // bg init
     var bg = document.getElementById("background");
