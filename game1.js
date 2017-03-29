@@ -38,6 +38,7 @@ $(document).ready(function() {
         } else {
             lane = new Lane(i, i, false);
             lanes.push(lane);
+            console.log(names_)
             var name_ = names[Math.floor(Math.random()*names.length)];
             console.log(name_)
             console.log(name_[0])
