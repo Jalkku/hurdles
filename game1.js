@@ -35,7 +35,7 @@ $(document).ready(function() {
         } else {
             lane = new Lane(i, i, false);
             lanes.push(lane);
-            lane.player.name = names[Math.floor(Math.random()*items.length)].toString();
+            lane.player.name = names[Math.floor(Math.random()*names.length)].toString();
         }
     }
 
