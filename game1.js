@@ -3,7 +3,7 @@ var lanes = [];
 var playerLane;
 var start;
 var timer;
-
+var names = [];
 console.log(names)
 $.getJSON('hurdlers.json', function(data) {
     var count = 0;
@@ -16,7 +16,7 @@ $.getJSON('hurdlers.json', function(data) {
 console.log(names)
 
 $(document).ready(function() {
-    var names = [];
+    
     
 
     // bg init
