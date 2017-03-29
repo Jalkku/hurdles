@@ -54,7 +54,7 @@ $(document).ready(function() {
 
 $(function() {
 
-    $.getJSON('hurdlres.json', function(data) {
+    $.getJSON('hurdlers.json', function(data) {
         console.log(data)
     });
 
