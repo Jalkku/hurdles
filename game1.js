@@ -3,6 +3,7 @@ var lanes = [];
 var playerLane;
 var start;
 var timer;
+var names = [];
 
 $(document).ready(function() {
     // bg init
@@ -25,7 +26,6 @@ $(document).ready(function() {
             playerInited = true;
         } else {
             lane = new Lane(i, i, false);
-            lane.player.name = "AI";
             lanes.push(lane);
         }
     }
@@ -53,10 +53,9 @@ $(document).ready(function() {
 });
 
 $(function() {
-
     $.getJSON('hurdlers.json', function(data) {
         data.data.forEach(function(name) {
-            console.log(name);
+            names.push(name+" "+surname+" ["+nationality+"]");
         });
     });
 
@@ -196,7 +195,7 @@ function Lane(x, y, isPlayer) {
 }
 
 function Player(lane, isPlayer) {
-    this.name = Math.random().toString(36).substring(5);
+    this.name = names[Math.floor(Math.random() * names.length)];
     var canvas = document.getElementById("layer1");
     this.model = new Image();
     if (isPlayer)
