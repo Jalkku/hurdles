@@ -16,7 +16,7 @@ $(document).ready(function() {
             count += 1;
         });
     });
-    console.log(names)
+    console.log(names[55])
 
     // bg init
     var bg = document.getElementById("background");
