@@ -12,7 +12,7 @@ $(document).ready(function() {
             names.push(name_);
         });
     });
-    
+
     // bg init
     var bg = document.getElementById("background");
     var bgCtx = bg.getContext("2d");
@@ -34,6 +34,7 @@ $(document).ready(function() {
         } else {
             lane = new Lane(i, i, false);
             lanes.push(lane);
+            lane.player.name = names[Math.floor(Math.random() * names.length)];
         }
     }
 
@@ -192,8 +193,7 @@ function Lane(x, y, isPlayer) {
 }
 
 function Player(lane, isPlayer) {
-    this.name = names[Math.floor(Math.random() * names.length)];
-    console.log(this.name)
+    this.name;
     var canvas = document.getElementById("layer1");
     this.model = new Image();
     if (isPlayer)
