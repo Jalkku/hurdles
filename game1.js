@@ -18,7 +18,12 @@ function initialize(callback) {
 }
 
 $(document).ready(function() {
-    initialize();
+    initialize(function() {
+        start();
+    });
+});
+
+function start() {
     // bg init
     var bg = document.getElementById("background");
     var bgCtx = bg.getContext("2d");
@@ -68,7 +73,7 @@ $(document).ready(function() {
     updateUI();
     countDown();
     perfectRun();
-});
+}
 
 var requestAnimationFrame =  
     window.requestAnimationFrame ||
