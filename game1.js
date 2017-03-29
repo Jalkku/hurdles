@@ -5,7 +5,7 @@ var start;
 var timer;
 var names = [];
 
-function initJson() {
+function initialize(callback) {
     $.getJSON('hurdlers.json', function(data) {
         var count = 0;
         data.data.forEach(function(name) {
@@ -13,13 +13,12 @@ function initJson() {
             names.push(name);
             count += 1;
         });
+        callback();
     });
 }
 
 $(document).ready(function() {
-    initialize(function() {
-        initJson();
-    });
+    initialize();
     // bg init
     var bg = document.getElementById("background");
     var bgCtx = bg.getContext("2d");
