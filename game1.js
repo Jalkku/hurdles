@@ -47,7 +47,7 @@ function start() {
             lanes.push(lane);
             var asd = names[0]
             var name_ = names[Math.floor(Math.random()*names.length)];
-            lane.player.name = name_.forename+" "+name_.lastname+" ["+name_.nationality+"]";
+            lane.player.name = name_.forename+" "+name_.surname+" ["+name_.nationality+"]";
         }
     }
 
@@ -86,7 +86,7 @@ var requestAnimationFrame =
 function perfectRun() {
     setInterval(function() {
         playerLane.player.run();
-    }, 10);
+    }, 1000);
 }
 
 function countDown() {
@@ -282,7 +282,7 @@ function Player(lane, isPlayer) {
             this.velocity.y = 0;
         }
 
-        if (this.position.x >= 32*18 && !this.finished) {
+        if (this.position.x >= 32*180 && !this.finished) {
             this.finished = true;
             this.time = new Date() - timer;
         }
