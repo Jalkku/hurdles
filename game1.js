@@ -14,7 +14,8 @@ $(document).ready(function() {
 
         });
     });
-    console.log(typeof names)
+    console.log(typeof names["0"])
+    console.log(typeof names[0])
 
     // bg init
     var bg = document.getElementById("background");
