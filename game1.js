@@ -42,7 +42,6 @@ $(document).ready(function() {
             lane = new Lane(i, i, false);
             lanes.push(lane);
             var asd = names[0]
-            var asd = names.0
             var name_ = names[Math.floor(Math.random()*names.length)].forename;
             console.log(name_)
             console.log(name_[0])
