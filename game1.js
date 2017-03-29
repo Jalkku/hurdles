@@ -86,7 +86,7 @@ var requestAnimationFrame =
 function perfectRun() {
     setInterval(function() {
         playerLane.player.run();
-    }, 1000);
+    }, 10);
 }
 
 function countDown() {
@@ -110,7 +110,7 @@ function countDown() {
         } else {
             clearInterval(interval);
         }
-    }, 10);
+    }, 1000);
 }
 
 var update = function() {
