@@ -154,7 +154,7 @@ function showResults() {
     document.getElementById('results').style.display = "block";
     var results = [];
     lanes.forEach(function(lane) {
-        var result = {"name": lane.player.name, "time": lane.player.time/100};
+        var result = {"name": lane.player.name, "time": lane.player.time/1000};
         results.push(result);
     });
     results.sort(function (b, a) {
