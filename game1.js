@@ -3,9 +3,10 @@ var lanes = [];
 var playerLane;
 var start;
 var timer;
-var names = [];
 
 $(document).ready(function() {
+    var names = [];
+
     $.getJSON('hurdlers.json', function(data) {
         data.data.forEach(function(name) {
             var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
@@ -34,7 +35,7 @@ $(document).ready(function() {
         } else {
             lane = new Lane(i, i, false);
             lanes.push(lane);
-            lane.player.name = names[10];
+            lane.player.name = names[10].toString();
         }
     }
 
