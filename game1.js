@@ -37,7 +37,10 @@ $(document).ready(function() {
         } else {
             lane = new Lane(i, i, false);
             lanes.push(lane);
-            lane.player.name = names[Math.floor(Math.random()*names.length)];
+            var name_ = names[Math.floor(Math.random()*names.length)];
+            console.log(name_)
+            console.log(name_[0])
+            lane.player.name = name_;
         }
     }
 
