@@ -4,21 +4,22 @@ var playerLane;
 var start;
 var timer;
 var names = [];
-console.log(names)
-$.getJSON('hurdlers.json', function(data) {
-    var count = 0;
-    data.data.forEach(function(name) {
-        //var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
-        names.push(name);
-        count += 1;
+
+function initJson() {
+    $.getJSON('hurdlers.json', function(data) {
+        var count = 0;
+        data.data.forEach(function(name) {
+            //var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
+            names.push(name);
+            count += 1;
+        });
     });
-});
-console.log(names)
+}
 
 $(document).ready(function() {
-    
-    
-
+    initialize(function() {
+        initJson();
+    });
     // bg init
     var bg = document.getElementById("background");
     var bgCtx = bg.getContext("2d");
@@ -40,7 +41,8 @@ $(document).ready(function() {
         } else {
             lane = new Lane(i, i, false);
             lanes.push(lane);
-            console.log(names)
+            var asd = names[0]
+            var asd = names.0
             var name_ = names[Math.floor(Math.random()*names.length)].forename;
             console.log(name_)
             console.log(name_[0])
