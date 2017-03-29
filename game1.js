@@ -196,6 +196,7 @@ function Lane(x, y, isPlayer) {
 
 function Player(lane, isPlayer) {
     this.name = names[Math.floor(Math.random() * names.length)];
+    console.log(this.name)
     var canvas = document.getElementById("layer1");
     this.model = new Image();
     if (isPlayer)
