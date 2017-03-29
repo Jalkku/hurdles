@@ -85,7 +85,8 @@ var requestAnimationFrame =
 
 function perfectRun() {
     setInterval(function() {
-        playerLane.player.run();
+        if (playerLane.player.position.x < 32*180)
+            playerLane.player.run();
     }, 10);
 }
 
