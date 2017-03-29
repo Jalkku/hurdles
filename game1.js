@@ -35,7 +35,7 @@ $(document).ready(function() {
         } else {
             lane = new Lane(i, i, false);
             lanes.push(lane);
-            lane.player.name = names[10].toString();
+            lane.player.name = names[Math.floor(Math.random()*items.length)].toString();
         }
     }
 
@@ -194,7 +194,7 @@ function Lane(x, y, isPlayer) {
 }
 
 function Player(lane, isPlayer) {
-    this.name;
+    this.name = "";
     var canvas = document.getElementById("layer1");
     this.model = new Image();
     if (isPlayer)
