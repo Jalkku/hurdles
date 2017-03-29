@@ -6,6 +6,13 @@ var timer;
 var names = [];
 
 $(document).ready(function() {
+    $.getJSON('hurdlers.json', function(data) {
+        data.data.forEach(function(name) {
+            var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
+            names.push(name_);
+        });
+    });
+    
     // bg init
     var bg = document.getElementById("background");
     var bgCtx = bg.getContext("2d");
@@ -51,18 +58,6 @@ $(document).ready(function() {
     countDown();
     perfectRun();
 });
-
-$(function() {
-    $.getJSON('hurdlers.json', function(data) {
-        data.data.forEach(function(name) {
-            var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
-            console.log(name_)
-            names.push(name.forename+" "+name.surname+" ["+name.nationality+"]");
-        });
-    });
-
-});
-
 
 var requestAnimationFrame =  
     window.requestAnimationFrame ||
