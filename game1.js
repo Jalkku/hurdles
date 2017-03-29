@@ -10,9 +10,11 @@ $(document).ready(function() {
     $.getJSON('hurdlers.json', function(data) {
         data.data.forEach(function(name) {
             var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
-            names.push(name_);
+            names.push(name_.toString());
+
         });
     });
+    console.log(names)
 
     // bg init
     var bg = document.getElementById("background");
@@ -35,7 +37,7 @@ $(document).ready(function() {
         } else {
             lane = new Lane(i, i, false);
             lanes.push(lane);
-            lane.player.name = names[Math.floor(Math.random()*names.length)].toString();
+            lane.player.name = names[Math.floor(Math.random()*names.length)];
         }
     }
 
