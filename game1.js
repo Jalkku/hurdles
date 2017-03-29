@@ -5,18 +5,17 @@ var start;
 var timer;
 
 $(document).ready(function() {
-    var names = {};
+    var names = [];
     console.log(names)
     $.getJSON('hurdlers.json', function(data) {
         var count = 0;
         data.data.forEach(function(name) {
-            console.log(count)
-            var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
-            names[count] = name_.toString();
+            //var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
+            names.push(name);
             count += 1;
         });
     });
-    console.log(names[55])
+    console.log(names)
 
     // bg init
     var bg = document.getElementById("background");
