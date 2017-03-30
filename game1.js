@@ -74,7 +74,7 @@ function onStart() {
     update();
     updateUI();
     countDown();
-    perfectRun();
+    //perfectRun();
 }
 
 var requestAnimationFrame =  
@@ -115,7 +115,7 @@ function countDown() {
         } else {
             clearInterval(interval);
         }
-    }, 10);
+    }, 1000);
 }
 
 var update = function() {
@@ -287,7 +287,7 @@ function Player(lane, isPlayer) {
             this.velocity.y = 0;
         }
 
-        if (this.position.x >= 32 && !this.finished) {
+        if (this.position.x >= 32*180 && !this.finished) {
             this.finished = true;
             this.time = new Date() - timer;
         }
