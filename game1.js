@@ -51,7 +51,7 @@ function onStart() {
             lane = new Lane(i, i, false);
             lanes.push(lane);
             var asd = names[0]
-            var name_ = "names[Math.floor(Math.random()*names.length)]";
+            var name_ = names[Math.floor(Math.random()*names.length)];
             lane.player.name = name_.forename+" "+name_.surname+" ["+name_.nationality+"]";
         }
     }
@@ -134,7 +134,7 @@ var update = function() {
             l1Ctx.drawImage(model, 32*i-playerLane.player.position.x+(lane.x*24), canvas.height-(1+lane.y)*48, 48, 48);
         }
         lane.player.update();
-        if (lane != playerLane && Math.random() > 0.7 && lane.player.position.x < 32*180) {
+        if (lane != playerLane && Math.random() > 0.8 && lane.player.position.x < 32*180) {
             lane.player.run();
         }
         // Render hurdles
@@ -246,7 +246,7 @@ function Player(lane, isPlayer) {
 
     this.jump = function(isLeft) {
         if (this.position.y > canvas.height-65)
-            this.velocity.y += 3;
+            this.velocity.y += 4;
     };
 
     this.hit = function(isLeft) {
@@ -282,7 +282,7 @@ function Player(lane, isPlayer) {
         }
 
         if (this.position.y < canvas.height-64) {
-            this.velocity.y -= 0.1;
+            this.velocity.y -= 0.2;
             this.shift = 192; // Jump sprite
         } else {
             this.velocity.y = 0;
