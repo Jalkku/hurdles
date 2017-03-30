@@ -9,7 +9,6 @@ function initialize(callback) {
     $.getJSON('hurdlers.json', function(data) {
         var count = 0;
         data.data.forEach(function(name) {
-            //var name_ = name.forename+" "+name.surname+" ["+name.nationality+"]";
             names.push(name);
             count += 1;
         });
@@ -18,20 +17,25 @@ function initialize(callback) {
 }
 
 $(document).ready(function() {
+    document.getElementById('results').style.display = "none";
     initialize(function() {
-        onStart();
     });
 });
 
 function onStart() {
+    /*
+    if (document.getElementById("name").value == "Name here") {
+        document.getElementById("name").style.background-color = "#C62828";
+        return;
+    }*/
+    document.getElementById('menu').style.display = "none";
     // bg init
+    var playerName = document.getElementById("name").value;
     var bg = document.getElementById("background");
     var bgCtx = bg.getContext("2d");
     bgCtx.rect(0, 0, bg.width, bg.height);
     bgCtx.fillStyle = bgColor;
     bgCtx.fill();
-
-    document.getElementById('results').style.display = "none";
 
     var playerInited = false;
     
@@ -40,13 +44,13 @@ function onStart() {
         if (Math.random() > 0.8 && !playerInited) {
             playerLane = new Lane(i, i, true);
             lanes.push(playerLane);
-            playerLane.player.name = "Player";
+            playerLane.player.name = playerName;
             playerInited = true;
         } else {
             lane = new Lane(i, i, false);
             lanes.push(lane);
             var asd = names[0]
-            var name_ = names[Math.floor(Math.random()*names.length)];
+            var name_ = "names[Math.floor(Math.random()*names.length)]";
             lane.player.name = name_.forename+" "+name_.surname+" ["+name_.nationality+"]";
         }
     }
@@ -70,7 +74,7 @@ function onStart() {
     update();
     updateUI();
     countDown();
-    //perfectRun();
+    perfectRun();
 }
 
 var requestAnimationFrame =  
@@ -111,7 +115,7 @@ function countDown() {
         } else {
             clearInterval(interval);
         }
-    }, 1000);
+    }, 10);
 }
 
 var update = function() {
@@ -283,7 +287,7 @@ function Player(lane, isPlayer) {
             this.velocity.y = 0;
         }
 
-        if (this.position.x >= 32*180 && !this.finished) {
+        if (this.position.x >= 32 && !this.finished) {
             this.finished = true;
             this.time = new Date() - timer;
         }

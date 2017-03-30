@@ -7,9 +7,17 @@
     <script type="text/javascript" src="game1.js"></script>
 
     <link rel="stylesheet" type="text/css" href="hurdles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    
+    <div id="menu">
+        <div class="menucontent">
+            <img src="img/icon.png" alt="Icon">
+            <h3>Hurdles</h3>
+            <input id="name" type="text" name="name" value="Name here"><br>
+            <button onclick="onStart()">Start</button>
+        </div>
+    </div>
     <canvas id="background" width="1280" height="720"></canvas>
     <canvas id="layer1" width="1280" height="720"></canvas>
     <div id="bar"></div>
