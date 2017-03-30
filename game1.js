@@ -4,6 +4,7 @@ var playerLane;
 var start;
 var timer;
 var names = [];
+var mainUpdate;
 
 function initialize(callback) {
     $.getJSON('hurdlers.json', function(data) {
@@ -71,7 +72,7 @@ function onStart() {
         }
     });
 
-    update();
+    mainUpdate = setInterval(function(){ update() }, 16);
     updateUI();
     countDown();
     //perfectRun();
@@ -84,7 +85,7 @@ var requestAnimationFrame =
     window.msRequestAnimationFrame ||
     window.oRequestAnimationFrame ||
     function(callback) {
-        return setTimeout(callback, 10);
+        return setTimeout(callback, 100);
     };
 
 function perfectRun() {
@@ -133,7 +134,7 @@ var update = function() {
             l1Ctx.drawImage(model, 32*i-playerLane.player.position.x+(lane.x*24), canvas.height-(1+lane.y)*48, 48, 48);
         }
         lane.player.update();
-        if (lane != playerLane && Math.random() > 0.9 && lane.player.position.x < 32*180) {
+        if (lane != playerLane && Math.random() > 0.7 && lane.player.position.x < 32*180) {
             lane.player.run();
         }
         // Render hurdles
@@ -149,10 +150,10 @@ var update = function() {
         l1Ctx.drawImage(lane.player.model, lane.player.shift, 0, 64, 64, lane.player.position.x-playerLane.player.position.x+(lane.x*24), lane.player.position.y-(lane.y*48), 64, 64);
     });
 
-    if (finished)
+    if (finished) {
         showResults();
-    else
-        requestAnimationFrame(update);
+        clearInterval(mainUpdate);
+    }
 }
 
 function showResults() {
@@ -245,7 +246,7 @@ function Player(lane, isPlayer) {
 
     this.jump = function(isLeft) {
         if (this.position.y > canvas.height-65)
-            this.velocity.y += 2;
+            this.velocity.y += 3;
     };
 
     this.hit = function(isLeft) {
@@ -276,12 +277,12 @@ function Player(lane, isPlayer) {
         this.position.y -= this.velocity.y;
 
         if (this.velocity.x > 0) {
-            this.velocity.x -= 0.02;
+            this.velocity.x -= 0.03;
             this.shift = 64*(1+Math.floor((this.position.x/10)%2)); // Run sprite
         }
 
         if (this.position.y < canvas.height-64) {
-            this.velocity.y -= 0.05;
+            this.velocity.y -= 0.1;
             this.shift = 192; // Jump sprite
         } else {
             this.velocity.y = 0;
