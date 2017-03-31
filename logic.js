@@ -7,17 +7,6 @@ var names = [];
 var mainUpdate;
 var state = {"name": "", "pb": 0};
 
-function initialize(callback) {
-    $.getJSON('hurdlers.json', function(data) {
-        var count = 0;
-        data.data.forEach(function(name) {
-            names.push(name);
-            count += 1;
-        });
-        callback();
-    });
-}
-
 $(document).ready(function() {
     window.addEventListener("message", function(evt) {
         if(evt.data.messageType === "LOAD") {
@@ -28,10 +17,17 @@ $(document).ready(function() {
     });
 
     load();
-    if (document.getElementById("name").value == "Name here" && state.name != "")
+    if (document.getElementById("name").value == "Name here" && state.name != "") {
         document.getElementById("name").value = state.name;
-    document.getElementById('results').style.display = "none";
-    initialize(function() {
+    }
+    document.getElementById("results").style.display = "none";
+    $.getJSON("hurdlers.json", function(data) {
+        var count = 0;
+        data.data.forEach(function(name) {
+            names.push(name);
+            count += 1;
+        });
+        callback();
     });
 });
 
@@ -44,9 +40,7 @@ function submitScore() {
 }
 
 function load() {
-    var msg = {
-        "messageType": "LOAD_REQUEST",
-    };
+    var msg = {"messageType": "LOAD_REQUEST"};
     window.parent.postMessage(msg, "*");
 }
 
@@ -64,8 +58,8 @@ function reload() {
 
 function onStart() {
     start = false;
-    document.getElementById('results').style.display = "none";
-    document.getElementById('menu').style.display = "none";
+    document.getElementById("results").style.display = "none";
+    document.getElementById("menu").style.display = "none";
     // bg init
     playerName = document.getElementById("name").value;
     save({"playerName": playerName});
@@ -76,7 +70,7 @@ function onStart() {
     bgCtx.fill();
 
     var playerInited = false;
-    
+
     for (var i = 10; i > 0; i--) {
         var lane;
         if (Math.random() > 0.8 && !playerInited) {
@@ -104,7 +98,7 @@ function onStart() {
 
 
     var lastPressed = 0;
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener("keydown", function(event) {
         if(event.keyCode == 37 && lastPressed != 37) {
             lastPressed = event.keyCode;
             playerLane.player.run(true);
@@ -125,7 +119,7 @@ function onStart() {
     //perfectRun();
 }
 
-var requestAnimationFrame =  
+var requestAnimationFrame =
     window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
@@ -150,7 +144,7 @@ function countDown() {
         bgCtx.fillStyle = bgColor;
         bgCtx.fill();
         bgCtx.font = "100px Arial";
-        bgCtx.fillStyle = '#26C6DA';
+        bgCtx.fillStyle = "#26C6DA";
         if (count > 0) {
             bgCtx.fillText(count,canvas.width/2,150);
             count -= 1;
@@ -203,7 +197,7 @@ var update = function() {
 }
 
 function showResults() {
-    document.getElementById('results').style.display = "block";
+    document.getElementById("results").style.display = "block";
     var results = [];
     lanes.forEach(function(lane) {
         var score = 30000-lane.player.time;
@@ -217,9 +211,9 @@ function showResults() {
     results.sort(function (b, a) {
         return a.time - b.time;
     });
-    
+
     var table = document.getElementById("resultTable");
-    
+
     for (var i = 0; i < results.length; i++) {
         var row = table.insertRow(0);
         var posCell = row.insertCell(0);
@@ -246,11 +240,11 @@ function showResults() {
 }
 
 function updateUI() {
-    var elem = document.getElementById("bar");   
+    var elem = document.getElementById("bar");
     var width = playerLane.player.velocity.x*20;
     if (width > 100)
         width = 100;
-    elem.style.width = (width).toString()+'%'; 
+    elem.style.width = (width).toString()+"%";
     requestAnimationFrame(updateUI);
 }
 
@@ -259,18 +253,18 @@ function Lane(x, y, isPlayer) {
     this.y = y;
     this.x = x;
     this.model = new Image();
-    this.model.src = 'img/track.png';
+    this.model.src = "img/track.png";
     this.model.addEventListener("load", loadImage, false);
     this.model_line = new Image();
-    this.model_line.src = 'img/track_line.png';
+    this.model_line.src = "img/track_line.png";
     this.model_line.addEventListener("load", loadImage, false);
 
     function loadImage(e) {
         //update();
     }
-    
+
     this.hurdles = [];
-    for (var i = 0; i < 10; i++) { 
+    for (var i = 0; i < 10; i++) {
         var hurdle = new Hurdle(i+1);
         this.hurdles.push(hurdle);
     }
@@ -281,9 +275,9 @@ function Player(lane, isPlayer) {
     var canvas = document.getElementById("layer1");
     this.model = new Image();
     if (isPlayer)
-        this.model.src = 'img/player.png';
+        this.model.src = "img/player.png";
     else
-        this.model.src = 'img/ai.png';
+        this.model.src = "img/ai.png";
     this.model.addEventListener("load", loadImage, false);
     this.shift = 0; // Idle
     this.lane = lane;
@@ -364,7 +358,7 @@ function Player(lane, isPlayer) {
 function Hurdle(i) {
     var canvas = document.getElementById("layer1");
     this.model = new Image();
-    this.model.src = 'img/hurdle.png';
+    this.model.src = "img/hurdle.png";
     //this.model.addEventListener("load", loadImage, false);
     this.shift = 0;
 
