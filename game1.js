@@ -58,6 +58,10 @@ function save(state) {
     window.parent.postMessage(msg, "*");
 }
 
+function reload() {
+    location.reload();
+}
+
 function onStart() {
     start = false;
     document.getElementById('results').style.display = "none";
