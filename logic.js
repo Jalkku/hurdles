@@ -107,7 +107,7 @@ function onStart() {
             lastPressed = event.keyCode;
             playerLane.player.jump();
         }
-        else if(event.keyCode == 67 && lastPressed != 67) {
+        else if(event.keyCode == 90 && lastPressed != 90) {
             lastPressed = event.keyCode;
             playerLane.player.run(false);
         }
