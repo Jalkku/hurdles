@@ -81,6 +81,8 @@ function onStart() {
             playerLane.player.name = playerName;
             playerInited = true;
         } else {
+            if (!playerInited && i === 1)
+                break;
             lane = new Lane(i, i, false);
             lanes.push(lane);
             var asd = names[0]
@@ -225,6 +227,16 @@ function showResults() {
         timeCell.innerHTML = results[i].time+"s";
         scoreCell.innerHTML = results[i].score;
     }
+
+    var row = table.insertRow(0);
+    var posCell = row.insertCell(0);
+    var nameCell = row.insertCell(1);
+    var timeCell = row.insertCell(2);
+    var scoreCell = row.insertCell(3);
+    posCell.innerHTML = "Pos";
+    nameCell.innerHTML = "Name";
+    timeCell.innerHTML = "Time";
+    scoreCell.innerHTML = "Score";
 
     save();
 }
