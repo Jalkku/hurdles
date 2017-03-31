@@ -99,15 +99,15 @@ function onStart() {
 
     var lastPressed = 0;
     document.addEventListener("keydown", function(event) {
-        if(event.keyCode == 37 && lastPressed != 37) {
+        if(event.keyCode == 88 && lastPressed != 88) {
             lastPressed = event.keyCode;
             playerLane.player.run(true);
         }
-        else if(event.keyCode == 38 && lastPressed != 38) {
+        else if(event.keyCode == 83 && lastPressed != 83) {
             lastPressed = event.keyCode;
             playerLane.player.jump();
         }
-        else if(event.keyCode == 39 && lastPressed != 39) {
+        else if(event.keyCode == 67 && lastPressed != 67) {
             lastPressed = event.keyCode;
             playerLane.player.run(false);
         }
