@@ -353,7 +353,7 @@ function Player(lane, isPlayer) {
             this.velocity.y = 0;
         }
 
-        if (this.position.x >= 32*18 && !this.finished) {
+        if (this.position.x >= 32*180 && !this.finished) {
             this.finished = true;
             this.time = new Date() - timer;
         }
