@@ -200,12 +200,12 @@ function showResults() {
     document.getElementById('results').style.display = "block";
     var results = [];
     lanes.forEach(function(lane) {
-        var score = 50000-lane.player.time;
+        var score = 30000-lane.player.time;
         if (score < 0)
             score = 0;
         if (lane == playerLane)
             state.score = score;
-        var result = {"name": lane.player.name, "time": lane.player.time/1000, "score": 30000-lane.player.time};
+        var result = {"name": lane.player.name, "time": lane.player.time/1000, "score": score};
         results.push(result);
     });
     results.sort(function (b, a) {
