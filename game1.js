@@ -5,6 +5,7 @@ var start;
 var timer;
 var names = [];
 var mainUpdate;
+var state = {"name": "", "pb": 0};
 
 function initialize(callback) {
     $.getJSON('hurdlers.json', function(data) {
@@ -18,20 +19,52 @@ function initialize(callback) {
 }
 
 $(document).ready(function() {
+    window.addEventListener("message", function(evt) {
+        if(evt.data.messageType === "LOAD") {
+            state = evt.data.state;
+        } else if (evt.data.messageType === "ERROR") {
+            alert(evt.data.info);
+        }
+    });
+
+    load();
+    if (document.getElementById("name").value == "Name here" && state.name != "")
+        document.getElementById("name").value = state.name;
     document.getElementById('results').style.display = "none";
     initialize(function() {
     });
 });
 
+function submitScore() {
+    var msg = {
+        "messageType": "SCORE",
+        "score": state.score.toString()
+    };
+    window.parent.postMessage(msg, "*");
+}
+
+function load() {
+    var msg = {
+        "messageType": "LOAD_REQUEST",
+    };
+    window.parent.postMessage(msg, "*");
+}
+
+function save(state) {
+    var msg = {
+        "messageType": "SAVE",
+        "gameState": state
+    };
+    window.parent.postMessage(msg, "*");
+}
+
 function onStart() {
-    /*
-    if (document.getElementById("name").value == "Name here") {
-        document.getElementById("name").style.background-color = "#C62828";
-        return;
-    }*/
+    start = false;
+    document.getElementById('results').style.display = "none";
     document.getElementById('menu').style.display = "none";
     // bg init
-    var playerName = document.getElementById("name").value;
+    playerName = document.getElementById("name").value;
+    save({"playerName": playerName});
     var bg = document.getElementById("background");
     var bgCtx = bg.getContext("2d");
     bgCtx.rect(0, 0, bg.width, bg.height);
@@ -55,6 +88,14 @@ function onStart() {
             lane.player.name = name_.forename+" "+name_.surname+" ["+name_.nationality+"]";
         }
     }
+
+    if (playerLane == undefined) {
+        playerLane = new Lane(1, 1, true);
+        lanes.push(playerLane);
+        playerLane.player.name = playerName;
+        playerInited = true;
+    }
+
 
     var lastPressed = 0;
     document.addEventListener('keydown', function(event) {
@@ -98,7 +139,6 @@ function perfectRun() {
 function countDown() {
     var count = 3;
     var interval = setInterval(function() {
-        console.log("helo")
         var canvas = document.getElementById("background");
         var bgCtx = canvas.getContext("2d");
         bgCtx.fillStyle = bgColor;
@@ -134,7 +174,7 @@ var update = function() {
             l1Ctx.drawImage(model, 32*i-playerLane.player.position.x+(lane.x*24), canvas.height-(1+lane.y)*48, 48, 48);
         }
         lane.player.update();
-        if (lane != playerLane && Math.random() > 0.8 && lane.player.position.x < 32*180) {
+        if (lane != playerLane && Math.random() > 0.85 && lane.player.position.x < 32*180) {
             lane.player.run();
         }
         // Render hurdles
@@ -160,7 +200,12 @@ function showResults() {
     document.getElementById('results').style.display = "block";
     var results = [];
     lanes.forEach(function(lane) {
-        var result = {"name": lane.player.name, "time": lane.player.time/1000};
+        var score = 50000-lane.player.time;
+        if (score < 0)
+            score = 0;
+        if (lane == playerLane)
+            state.score = score;
+        var result = {"name": lane.player.name, "time": lane.player.time/1000, "score": 30000-lane.player.time};
         results.push(result);
     });
     results.sort(function (b, a) {
@@ -174,10 +219,14 @@ function showResults() {
         var posCell = row.insertCell(0);
         var nameCell = row.insertCell(1);
         var timeCell = row.insertCell(2);
+        var scoreCell = row.insertCell(3);
         posCell.innerHTML = 10-i;
         nameCell.innerHTML = results[i].name;
         timeCell.innerHTML = results[i].time+"s";
+        scoreCell.innerHTML = results[i].score;
     }
+
+    save();
 }
 
 function updateUI() {
@@ -277,7 +326,7 @@ function Player(lane, isPlayer) {
         this.position.y -= this.velocity.y;
 
         if (this.velocity.x > 0) {
-            this.velocity.x -= 0.03;
+            this.velocity.x -= 0.035;
             this.shift = 64*(1+Math.floor((this.position.x/10)%2)); // Run sprite
         }
 
@@ -288,7 +337,7 @@ function Player(lane, isPlayer) {
             this.velocity.y = 0;
         }
 
-        if (this.position.x >= 32*180 && !this.finished) {
+        if (this.position.x >= 32*18 && !this.finished) {
             this.finished = true;
             this.time = new Date() - timer;
         }

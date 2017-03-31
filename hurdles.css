@@ -28,7 +28,7 @@ canvas {
     text-align:center;
     font-family: "Roboto-Regular";
     src: url("fonts/Roboto-Regular.ttf") format('truetype');
-    -webkit-animation: pulsateColor 1s ease-out;
+    -webkit-animation: pulsate 1s ease-out;
     -webkit-animation-iteration-count: infinite; 
 }
 
@@ -36,7 +36,7 @@ canvas {
     background-color: #E0F7FA;
 }
 
-.menucontent button {
+button {
     border: none;
     border-radius: 4px;
     width: 256px;
@@ -49,13 +49,7 @@ canvas {
     src: url("fonts/Roboto-Regular.ttf") format('truetype');
 }
 
-.menucontent img{
-    opacity: 0.5;
-    -webkit-animation: pulsateOpacity 1s ease-out;
-    -webkit-animation-iteration-count: infinite; 
-}
-
-.menucontent button:hover {
+button:hover {
     background-color: #E0F7FA;
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
@@ -133,12 +127,8 @@ table {
     font-size: 28px;
 }
 
-@-webkit-keyframes pulsateColor {
+@-webkit-keyframes pulsate {
     50% {background-color: #E0F7FA;}
-}
-
-@-webkit-keyframes pulsateOpacity {
-    50% {opacity: 1;}
 }
 
 tr:nth-child(odd){background-color: #37474F}
